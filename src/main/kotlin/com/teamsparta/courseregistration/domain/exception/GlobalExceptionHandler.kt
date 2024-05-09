@@ -14,12 +14,6 @@ class GlobalExceptionHandler {
     fun handleModelNotFoundException(e: ModelNotFoundException): ResponseEntity<ErrorResponse> {
         return ResponseEntity
             .status(HttpStatus.NOT_FOUND)
-            .body(ErrorResponse(e.message))
+            .body(ErrorResponse(errorCode = "", message = e.message))
     }
-  @ExceptionHandler(IllegalArgumentException::class)
-  fun handleIllegalArgumentException(e: IllegalArgumentException): ResponseEntity<ErrorResponse> {
-      return ResponseEntity
-          .status(HttpStatus.CONFLICT)
-          .body(ErrorResponse(e.message))
-  }
 }
