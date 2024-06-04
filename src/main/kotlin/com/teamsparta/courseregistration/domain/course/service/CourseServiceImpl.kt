@@ -22,6 +22,7 @@ import com.teamsparta.courseregistration.domain.lecture.model.Lecture
 import com.teamsparta.courseregistration.domain.lecture.model.toResponse
 import com.teamsparta.courseregistration.domain.lecture.repository.LectureRepository
 import com.teamsparta.courseregistration.domain.user.repository.UserRepository
+import com.teamsparta.courseregistration.infra.aop.StopWatch
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -38,6 +39,7 @@ class CourseServiceImpl(
         return courseRepository.findAll().map { it.toResponse() }
     }
 
+    @StopWatch
     override fun getCourseById(courseId: Long): CourseResponse {
         val course = courseRepository.findByIdOrNull(courseId) ?: throw ModelNotFoundException("Course", courseId)
         return course.toResponse()
@@ -78,7 +80,7 @@ class CourseServiceImpl(
         val lecture = Lecture(
             title = request.title,
             videoUrl = request.videoUrl,
-            course = course
+//            course = course
         )
         // Course에 Lecture 추가
         course.addLecture(lecture)
@@ -87,9 +89,12 @@ class CourseServiceImpl(
         return lecture.toResponse()
     }
 
-    override fun getLecture(courseId: Long, lectureId: Long): LectureResponse {
-        val lecture = lectureRepository.findByCourseIdAndId(courseId, lectureId)
-            ?: throw ModelNotFoundException("Lecture", lectureId)
+//    override fun getLecture(courseId: Long, lectureId: Long): LectureResponse {
+//        val lecture = lectureRepository.findByCourseIdAndId(courseId, lectureId)
+//            ?: throw ModelNotFoundException("Lecture", lectureId)
+override fun getLecture(courseId: Long, lectureId: Long): LectureResponse {
+    val lecture = lectureRepository.findByIdOrNull(lectureId)
+        ?: throw ModelNotFoundException("Lecture", lectureId)
 
         return lecture.toResponse()
     }
@@ -105,7 +110,8 @@ class CourseServiceImpl(
         lectureId: Long,
         request: UpdateLectureRequest
     ): LectureResponse {
-        val lecture = lectureRepository.findByCourseIdAndId(courseId, lectureId)
+
+        val lecture = lectureRepository.findByIdOrNull(lectureId)
             ?: throw ModelNotFoundException("Lecture", lectureId)
 
         val (title, videoUrl) = request

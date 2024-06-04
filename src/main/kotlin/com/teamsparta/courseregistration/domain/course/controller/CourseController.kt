@@ -4,7 +4,6 @@ import com.teamsparta.courseregistration.domain.course.dto.CourseResponse
 import com.teamsparta.courseregistration.domain.course.dto.CreateCourseRequest
 import com.teamsparta.courseregistration.domain.course.dto.UpdateCourseRequest
 import com.teamsparta.courseregistration.domain.course.service.CourseService
-import com.teamsparta.courseregistration.domain.exception.ModelNotFoundException
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
