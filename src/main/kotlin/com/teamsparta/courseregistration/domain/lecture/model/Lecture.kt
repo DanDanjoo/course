@@ -1,6 +1,5 @@
 package com.teamsparta.courseregistration.domain.lecture.model
 
-import com.teamsparta.courseregistration.domain.course.model.Course
 import com.teamsparta.courseregistration.domain.lecture.dto.LectureResponse
 import jakarta.persistence.*
 
@@ -13,9 +12,7 @@ class Lecture(
     @Column(name = "video_url", nullable = false)
     var videoUrl: String,
 
-//    @ManyToOne(fetch = FetchType.LAZY)
-//    @JoinColumn(name = "course_id")
-//    var course: Course
+
 ) {
 
     @Id
