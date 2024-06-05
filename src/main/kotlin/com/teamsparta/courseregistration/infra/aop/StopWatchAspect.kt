@@ -29,7 +29,5 @@ class StopWatchAspect {
 
         val timeElapsedMs = stopWatch.totalTimeMillis // 밀리 초 단위로 timeElapsedMs 변수에 저장 totalTimeMillis는 측정한 전체 실행 시간을 반환하는 메서드
         logger.info("Method Name: $methodName | Arguments: ${methodArguments.joinToString(", ")} | Execution Time : ${timeElapsedMs}ms ")
-
-
     }
 }
