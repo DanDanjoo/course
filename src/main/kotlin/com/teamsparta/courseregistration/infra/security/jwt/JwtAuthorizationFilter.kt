@@ -1,7 +1,6 @@
 package com.teamsparta.courseregistration.infra.security.jwt
 
 import com.teamsparta.courseregistration.infra.security.UserPrincipal
-import com.teamsparta.courseregistration.infra.security.jwt.JwtPlugin
 import jakarta.servlet.FilterChain
 import jakarta.servlet.http.HttpServletRequest
 import jakarta.servlet.http.HttpServletResponse
