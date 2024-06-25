@@ -221,4 +221,8 @@ override fun getLecture(courseId: Long, lectureId: Long): LectureResponse {
 
         return courseApplicationRepository.save(application).toResponse()
     }
+
+    override fun searchCourseList(title: String): List<CourseResponse>? {
+       return courseRepository.searchCourseListByTitle(title).map { it.toResponse() }
+    }
 }

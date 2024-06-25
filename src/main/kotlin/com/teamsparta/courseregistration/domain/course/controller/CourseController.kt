@@ -15,6 +15,17 @@ class CourseController (
     private val courseService: CourseService
 
 ) {
+
+    @GetMapping("/search")
+    @PreAuthorize("hasRole('TUTOR') or hasRole('ADMIN')")
+    fun searchCourseList(@RequestParam(value = "title") title: String): ResponseEntity<List<CourseResponse>> {
+        return ResponseEntity
+            .status(HttpStatus.OK)
+            .body(courseService.searchCourseList(title)
+        )
+    }
+
+
     @PreAuthorize("hasRole('TUTOR') or hasRole('STUDENT')")
     @GetMapping
     fun getCourseList(): ResponseEntity<List<CourseResponse>> {
