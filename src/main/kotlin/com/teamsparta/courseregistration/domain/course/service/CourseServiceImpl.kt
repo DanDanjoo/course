@@ -23,6 +23,8 @@ import com.teamsparta.courseregistration.domain.lecture.model.toResponse
 import com.teamsparta.courseregistration.domain.lecture.repository.LectureRepository
 import com.teamsparta.courseregistration.domain.user.repository.UserRepository
 import com.teamsparta.courseregistration.infra.aop.StopWatch
+import org.springframework.data.domain.Page
+import org.springframework.data.domain.Pageable
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -224,5 +226,15 @@ override fun getLecture(courseId: Long, lectureId: Long): LectureResponse {
 
     override fun searchCourseList(title: String): List<CourseResponse>? {
        return courseRepository.searchCourseListByTitle(title).map { it.toResponse() }
+    }
+
+    override fun getPaginatedCourseList(pageable: Pageable, status: String?): Page<CourseResponse>? {
+        val courseStatus = when (status){
+            "OPEN" -> CourseStatus.OPEN
+            "CLOSED" -> CourseStatus.CLOSED
+            null -> null
+            else -> throw IllegalArgumentException("The stats is invalid")
+        }
+        return courseRepository.findByPageableAndStatus(pageable, courseStatus).map { it.toResponse() }
     }
 }
