@@ -82,7 +82,7 @@ class CourseServiceImpl(
         val lecture = Lecture(
             title = request.title,
             videoUrl = request.videoUrl,
-//            course = course
+            course = course
         )
         // Course에 Lecture 추가
         course.addLecture(lecture)
